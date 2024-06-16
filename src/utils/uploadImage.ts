@@ -21,7 +21,7 @@ async function downloadImage(url: string, filePath: string) {
   });
 }
 
-const savePath = path.join(__dirname, "../../public/resultImages");
+const savePath = path.join(process.cwd(), "/resultImages");
 
 fs.mkdirSync(savePath, { recursive: true });
 
