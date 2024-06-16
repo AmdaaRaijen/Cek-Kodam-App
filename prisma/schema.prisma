@@ -9,9 +9,9 @@ datasource db {
 
 model Results {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
-  resultName      String @unique
+  resultName      String
   resultImageUrl  String
-  resultImagePath String
+  resultImagePath String @unique
   userName        String
   number          Int    @unique
 }
