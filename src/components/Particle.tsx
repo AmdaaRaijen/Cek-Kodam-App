@@ -1,13 +1,18 @@
 "use client";
-import React from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { loadSlim } from "@tsparticles/slim"; // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
+
 import { useEffect, useMemo, useState } from "react";
+import Particles, { initParticlesEngine } from "@tsparticles/react";
+import {
+  type Container,
+  type ISourceOptions,
+  MoveDirection,
+  OutMode,
+} from "@tsparticles/engine";
+import { loadSlim } from "@tsparticles/slim";
 
 export const Particle = () => {
   const [init, setInit] = useState(false);
 
-  // this should be run only once per application lifetime
   useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
@@ -16,11 +21,11 @@ export const Particle = () => {
     });
   }, []);
 
-  const particlesLoaded = (container) => {
+  const particlesLoaded = async (container?: Container): Promise<void> => {
     console.log(container);
   };
 
-  const options = useMemo(
+  const options: ISourceOptions = useMemo(
     () => ({
       background: {
         color: {
@@ -62,10 +67,10 @@ export const Particle = () => {
           width: 1,
         },
         move: {
-          direction: "none",
+          direction: MoveDirection.none,
           enable: true,
           outModes: {
-            default: "bounce",
+            default: OutMode.out,
           },
           random: false,
           speed: 6,
@@ -91,6 +96,7 @@ export const Particle = () => {
     }),
     []
   );
+
   return (
     <Particles
       className="absolute inset-0 z-[-1] blur-[2px]"

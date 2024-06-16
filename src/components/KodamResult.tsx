@@ -19,7 +19,7 @@ export default function KodamResult({ loading, data }: Props) {
           Cek Kodam Online
         </h1>
         {!loading && !data.kodam && (
-          <p className="drop-shadow-md max-w-sm lg:max-w-md text-center text-xs lg:text-md">
+          <p className="drop-shadow-md max-w-sm lg:max-w-md text-center text-xs lg:text-base">
             Website untuk Cek kodam online dengan memasukkan namamu di bawah.
             Just for fun! ✨
           </p>
