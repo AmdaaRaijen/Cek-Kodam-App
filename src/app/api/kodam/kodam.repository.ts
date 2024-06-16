@@ -23,6 +23,23 @@ export async function saveResult(data: Data) {
   return result;
 }
 
+export async function getResult() {
+  const counter = await prisma.results.count();
+
+  const random = Math.floor(Math.random() * counter);
+
+  return await prisma.results.findFirst({
+    where: {
+      number: random,
+    },
+    select: {
+      resultName: true,
+      resultImageUrl: true,
+      resultImagePath: true,
+    },
+  });
+}
+
 async function counter() {
   return await prisma.results.count();
 }
