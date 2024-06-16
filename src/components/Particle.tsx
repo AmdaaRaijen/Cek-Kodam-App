@@ -52,10 +52,10 @@ export const Particle = () => {
       },
       particles: {
         color: {
-          value: "#000000",
+          value: "#3A4D39",
         },
         links: {
-          color: "#ffffff",
+          color: "#4F6F52",
           distance: 150,
           enable: true,
           opacity: 0.5,
@@ -93,7 +93,7 @@ export const Particle = () => {
   );
   return (
     <Particles
-      className="absolute inset-0 z-[-1] blur-sm"
+      className="absolute inset-0 z-[-1] blur-[2px]"
       id="tsparticles"
       particlesLoaded={particlesLoaded}
       options={options}

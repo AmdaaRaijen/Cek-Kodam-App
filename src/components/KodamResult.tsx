@@ -1,11 +1,13 @@
 import React from "react";
 import Loading from "./Loading";
+import { CldImage } from "next-cloudinary";
 
 interface Props {
   loading: boolean;
   data: {
     kodam: string;
     image: string;
+    cloudinaryPublicId: string;
   };
 }
 
@@ -22,9 +24,9 @@ export default function KodamResult({ loading, data }: Props) {
         <div className="flex flex-col items-center justify-center text-center gap-5">
           {data.kodam}
           {data.image && (
-            <img
+            <CldImage
               className="w-full max-w-xs rounded-xl shadow-md"
-              src={data.image}
+              src={data.cloudinaryPublicId}
               alt="Kodam"
             />
           )}

@@ -31,7 +31,7 @@ export default async function generateKodam(nama: string) {
     if (message.split(" ").length > 3) {
       console.log(message);
       return {
-        kodam:
+        error:
           "Mohon Maaf, kodam belum ditemukan 🥲. Mohon untuk mencoba kembali! ✨",
       };
     }
@@ -39,14 +39,15 @@ export default async function generateKodam(nama: string) {
 
     return {
       kodam: message,
-      image: imageKodam,
+      image: imageKodam?.url,
+      cloudinaryPublicId: imageKodam?.public_id,
     };
   }
 
   console.log(message);
 
   return {
-    kodam:
+    error:
       "Mohon Maaf, kodam belum ditemukan 🥲. Mohon untuk mencoba kembali! ✨",
     image: null,
   };

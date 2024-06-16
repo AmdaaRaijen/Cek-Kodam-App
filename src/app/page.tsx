@@ -15,6 +15,7 @@ export default function Home() {
   const [state, setState] = useState({
     kodam: "",
     image: "",
+    cloudinaryPublicId: "",
   });
   const [loading, setLoading] = useState(false);
 
