@@ -31,7 +31,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 text-[#3A4D39] bg-[#ECE3CE]/70">
+    <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 text-primary bg-background/70">
       <Particle />
 
       <WaterMark />

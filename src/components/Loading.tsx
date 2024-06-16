@@ -43,7 +43,7 @@ export default function Loading() {
   return (
     <div className="flex flex-col justify-center items-center gap-5">
       <p className="font-semibold drop-shadow-md">{text}</p>
-      <HashLoader color="#3A4D39" />
+      <HashLoader color="#4F6F52" />
     </div>
   );
 }
