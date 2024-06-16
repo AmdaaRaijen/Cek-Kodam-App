@@ -1,15 +1,9 @@
 "use client";
 import { Particle } from "@/components/Particle";
 import { FormEvent, useState } from "react";
-import { Poppins } from "next/font/google";
 import KodamResult from "@/components/KodamResult";
 import InputKodam from "@/components/InputKodam";
 import WaterMark from "@/components/WaterMark";
-
-const poppins = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-});
 
 export default function Home() {
   const [state, setState] = useState({
@@ -37,9 +31,7 @@ export default function Home() {
   };
 
   return (
-    <main
-      className={`${poppins.className} flex min-h-screen flex-col items-center justify-between lg:p-24 text-[#3A4D39] bg-[#ECE3CE]/70`}
-    >
+    <main className="flex min-h-screen flex-col items-center justify-between lg:p-24 text-[#3A4D39] bg-[#ECE3CE]/70">
       <Particle />
 
       <WaterMark />
