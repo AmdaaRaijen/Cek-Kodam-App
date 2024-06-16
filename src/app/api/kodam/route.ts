@@ -1,7 +1,7 @@
 import generateKodam from "../../../actions/generateKodam";
-import saveResult from "./kodam.repository";
+import { saveResult } from "./kodam.repository";
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<Response> {
   const formData = await request.formData();
 
   const nama = formData.get("nama") as string;

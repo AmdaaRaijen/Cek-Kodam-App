@@ -1,5 +1,6 @@
 import cloudinary from "@/libs/cloudinary";
 import Axios from "axios";
+import { UploadApiResponse } from "cloudinary";
 import fs from "fs";
 import path from "path";
 
@@ -24,7 +25,10 @@ const savePath = path.join(__dirname, "../../public/resultImages");
 
 fs.mkdirSync(savePath, { recursive: true });
 
-export default async function uploadImage(url: string, fileName: string) {
+export default async function uploadImage(
+  url: string,
+  fileName: string
+): Promise<UploadApiResponse | null> {
   const options = {
     use_filename: true,
     unique_filename: false,
@@ -40,8 +44,6 @@ export default async function uploadImage(url: string, fileName: string) {
     );
 
     fs.unlinkSync(path.join(savePath, fileName));
-
-    console.log("Image uploaded to cloudinary", result);
 
     return result;
   } catch (error) {

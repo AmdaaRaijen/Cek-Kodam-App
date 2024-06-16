@@ -7,7 +7,7 @@ interface Data {
   userName: string;
 }
 
-export default async function saveResult(data: Data) {
+export async function saveResult(data: Data) {
   const number = (await counter()) + 1;
 
   const result = await prisma.results.create({
