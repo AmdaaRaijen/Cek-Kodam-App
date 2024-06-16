@@ -28,6 +28,8 @@ export default function KodamResult({ loading, data }: Props) {
               className="w-full max-w-xs rounded-xl shadow-md"
               src={data.cloudinaryPublicId}
               alt="Kodam"
+              width="1024"
+              height="1024"
             />
           )}
         </div>
