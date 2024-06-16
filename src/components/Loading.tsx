@@ -24,12 +24,6 @@ export default function Loading() {
     "Kodam legendaris, terimalah panggilanku!",
     "Kodam gaib, dengan mantra ini hadir!",
     "Kodam sakti, datanglah dari dimensi lain!",
-    "Mencari Kodam",
-    "Menghubungi Dukun Terdekat",
-    "Menghubungi Ambatron",
-    "Mencari Sosok Hitam",
-    "Menerawang Kodam",
-    "Mencari Kodam Terkuat",
   ];
 
   const [text, setText] = React.useState(

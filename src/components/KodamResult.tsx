@@ -14,9 +14,17 @@ interface Props {
 export default function KodamResult({ loading, data }: Props) {
   return (
     <div className="relative z-[1] flex place-items-center flex-col items-center gap-5 mb-5 mt-20">
-      <h1 className="text-4xl lg:text-6xl font-bold tracking-wide drop-shadow-md">
-        Cek Kodam Online
-      </h1>
+      <div className="flex flex-col items-center justify-center gap-5">
+        <h1 className="text-4xl lg:text-6xl font-bold tracking-wide drop-shadow-md">
+          Cek Kodam Online
+        </h1>
+        {!loading && !data.kodam && (
+          <p className="drop-shadow-md max-w-sm lg:max-w-md text-center text-xs lg:text-md">
+            Website untuk Cek kodam online dengan memasukkan namamu di bawah.
+            Just for fun! ✨
+          </p>
+        )}
+      </div>
 
       {loading ? (
         <Loading />
