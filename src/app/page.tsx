@@ -46,7 +46,7 @@ export default function Home() {
 
       <KodamResult loading={loading} data={state} />
 
-      <InputKodam handleSubmit={handleSubmit} />
+      <InputKodam handleSubmit={handleSubmit} loading={loading} />
     </main>
   );
 }
