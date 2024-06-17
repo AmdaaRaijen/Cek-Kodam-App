@@ -29,8 +29,7 @@ export default async function uploadImage(
   url: string,
   fileName: string
 ): Promise<UploadApiResponse | null> {
-  const generatePublicId =
-    fileName + Date.now().toString() + Math.random() * 100;
+  const generatePublicId = fileName.split(".")[0] + "_" + Date.now().toString();
 
   const options = {
     use_filename: true,
