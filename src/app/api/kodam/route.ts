@@ -1,5 +1,11 @@
-import generateKodam from "../../../actions/generateKodam";
-import { saveResult } from "./kodam.repository";
+import { namaIsEmptyException } from "./kodam.exception";
+import {
+  getDataFromDatabase,
+  getDataFromGemini,
+  getDataFromOpenAI,
+} from "./kodam.servive";
+
+const KODAM_GENERATE_SOURCE = process.env.KODAM_GENERATE_SOURCE;
 
 export async function POST(request: Request): Promise<Response> {
   const formData = await request.formData();
@@ -7,39 +13,16 @@ export async function POST(request: Request): Promise<Response> {
   const nama: string | null = formData.get("nama") as string;
 
   if (!nama) {
-    return new Response(
-      JSON.stringify({
-        message: "Silahkan masukkan namamu terlebih dahulu!",
-      }),
-      {
-        status: 400,
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    );
+    return namaIsEmptyException("Silahkan masukkan namamu terlebih dahulu!");
   }
 
-  const result = await generateKodam(nama);
-
-  if (result.error) {
-    return new Response(JSON.stringify(result), {
-      headers: {
-        "content-type": "application/json",
-      },
-    });
+  if (KODAM_GENERATE_SOURCE === "DATABASE") {
+    return await getDataFromDatabase();
   }
 
-  await saveResult({
-    resultName: result.kodam as string,
-    resultUrl: result.image,
-    resultPath: result.cloudinaryPublicId,
-    userName: nama,
-  });
+  if (KODAM_GENERATE_SOURCE === "GEMINI") {
+    return getDataFromGemini();
+  }
 
-  return new Response(JSON.stringify(result), {
-    headers: {
-      "content-type": "application/json",
-    },
-  });
+  return await getDataFromOpenAI(nama);
 }
