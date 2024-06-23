@@ -4,7 +4,21 @@ import { saveResult } from "./kodam.repository";
 export async function POST(request: Request): Promise<Response> {
   const formData = await request.formData();
 
-  const nama = formData.get("nama") as string;
+  const nama: string | null = formData.get("nama") as string;
+
+  if (!nama) {
+    return new Response(
+      JSON.stringify({
+        message: "Silahkan masukkan namamu terlebih dahulu!",
+      }),
+      {
+        status: 400,
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+  }
 
   const result = await generateKodam(nama);
 

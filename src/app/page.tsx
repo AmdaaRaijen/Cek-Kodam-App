@@ -6,28 +6,47 @@ import InputKodam from "@/components/InputKodam";
 import WaterMark from "@/components/WaterMark";
 
 export default function Home() {
-  const [state, setState] = useState({
+  const [kodamData, setKodamData] = useState({
     kodam: "",
     image: "",
     cloudinaryPublicId: "",
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [name, setName] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     setLoading(true);
-    fetch("/api/kodam", {
-      method: "POST",
-      body: new FormData(e.target as HTMLFormElement),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setState(data);
-      })
-      .finally(() => {
-        setLoading(false);
+
+    if (!name) {
+      setError("Silahkan masukkan namamu terlebih dahulu!");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/kodam", {
+        method: "POST",
+        body: new FormData(e.target as HTMLFormElement),
       });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setError(data.message);
+        setLoading(false);
+        return;
+      }
+
+      setKodamData(data);
+      setError("");
+    } catch (error) {
+      setError("Terjadi kesalahan saat memproses data");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,9 +55,13 @@ export default function Home() {
 
       <WaterMark />
 
-      <KodamResult loading={loading} data={state} />
+      <KodamResult loading={loading} data={kodamData} error={error} />
 
-      <InputKodam handleSubmit={handleSubmit} loading={loading} />
+      <InputKodam
+        handleSubmit={handleSubmit}
+        loading={loading}
+        setName={setName}
+      />
     </main>
   );
 }

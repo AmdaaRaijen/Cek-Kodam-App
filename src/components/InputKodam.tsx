@@ -2,10 +2,16 @@ import React, { FormEvent } from "react";
 
 interface Props {
   handleSubmit: (e: FormEvent) => void;
+  setName: (name: string) => void;
   loading: boolean;
 }
 
-export default function InputKodam({ handleSubmit, loading }: Props) {
+export default function InputKodam({ handleSubmit, loading, setName }: Props) {
+  const handleChange = (e: FormEvent) => {
+    const target = e.target as HTMLInputElement;
+    setName(target.value);
+  };
+
   return (
     <div className=" grid text-center  mb-32 lg:mb-0 lg:w-full lg:max-w-5xl lg:text-left ">
       <form
@@ -17,6 +23,7 @@ export default function InputKodam({ handleSubmit, loading }: Props) {
           name="nama"
           disabled={loading}
           placeholder="Tulis Namamu Di Sini"
+          onChange={handleChange}
         />
         <button
           disabled={loading}

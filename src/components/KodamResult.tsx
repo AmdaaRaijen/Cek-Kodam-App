@@ -4,6 +4,7 @@ import { CldImage } from "next-cloudinary";
 
 interface Props {
   loading: boolean;
+  error?: string;
   data: {
     kodam: string;
     image: string;
@@ -11,7 +12,7 @@ interface Props {
   };
 }
 
-export default function KodamResult({ loading, data }: Props) {
+export default function KodamResult({ loading, data, error }: Props) {
   return (
     <div className="relative z-[1] flex place-items-center flex-col items-center gap-5 mb-5 mt-20">
       <div className="flex flex-col items-center justify-center gap-5">
@@ -41,6 +42,10 @@ export default function KodamResult({ loading, data }: Props) {
             />
           )}
         </div>
+      )}
+
+      {error && (
+        <p className="text-red-500 text-center text-xs lg:text-base">{error}</p>
       )}
     </div>
   );
