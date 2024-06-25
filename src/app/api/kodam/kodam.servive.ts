@@ -60,7 +60,7 @@ export async function getDataFromOpenAI(nama: string) {
 export function getDataFromGemini() {
   return new Response(
     JSON.stringify({
-      message: "Gemini is not available yet",
+      message: "This feature (Gemini) is not available yet",
     }),
     {
       status: 501,

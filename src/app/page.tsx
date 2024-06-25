@@ -20,7 +20,7 @@ export default function Home() {
 
     setLoading(true);
 
-    if (!name) {
+    if (!name.trim()) {
       setError("Silahkan masukkan namamu terlebih dahulu!");
       setLoading(false);
       return;

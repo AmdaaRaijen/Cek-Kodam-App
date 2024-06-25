@@ -12,7 +12,7 @@ export async function POST(request: Request): Promise<Response> {
 
   const nama: string | null = formData.get("nama") as string;
 
-  if (!nama) {
+  if (!nama.trim()) {
     return namaIsEmptyException("Silahkan masukkan namamu terlebih dahulu!");
   }
 
