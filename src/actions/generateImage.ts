@@ -3,14 +3,29 @@
 import { UploadApiErrorResponse, UploadApiResponse } from "cloudinary";
 import openai from "../libs/openai";
 import uploadImage from "@/utils/uploadImage";
+import geminiAI from "@/libs/geminiai";
 
 export default async function generateGambarKodam(
-  namaKodam: string
+  namaKodam: string,
+  mode: "OPENAI" | "GEMINI" = "OPENAI"
 ): Promise<UploadApiResponse | UploadApiErrorResponse | null> {
   console.log("generating image for ", namaKodam);
 
-  const prompt = `Buatlah sebuah gambar yang terinspirasi dari nama ${namaKodam}. Gambar ini harus bersifat umum dan mencakup elemen-elemen yang secara artistik menggambarkan karakter atau esensi dari nama tersebut. Gunakan kreativitas Anda untuk menghasilkan gambar yang menarik dan unik.`;
+  const prompt = `Buatlah sebuah gambar yang terinspirasi dari nama "${namaKodam}". Gambar ini harus bersifat umum dan mencakup elemen-elemen yang secara artistik menggambarkan karakter atau esensi dari nama tersebut. Gunakan kreativitas Anda untuk menghasilkan gambar yang menarik dan unik.`;
 
+  if (mode === "GEMINI") {
+    await GeminiAiGeneration(prompt);
+
+    return null;
+  }
+  const imageUrl = await OpenAiGeneration(prompt);
+
+  const uploadedImage = await uploadImage(imageUrl, `${namaKodam}.png`);
+
+  return uploadedImage;
+}
+
+async function OpenAiGeneration(prompt: string) {
   const response = await openai.images.generate({
     model: "dall-e-3",
     prompt: prompt,
@@ -23,9 +38,13 @@ export default async function generateGambarKodam(
     throw new Error("Failed to generate image");
   }
 
-  const imageUrl = response.data[0].url as string;
+  return response.data[0].url as string;
+}
 
-  const uploadedImage = await uploadImage(imageUrl, `${namaKodam}.png`);
+async function GeminiAiGeneration(prompt: string) {
+  const result = await geminiAI.generateContent(prompt);
 
-  return uploadedImage;
+  const response = result.response;
+
+  console.log(response);
 }

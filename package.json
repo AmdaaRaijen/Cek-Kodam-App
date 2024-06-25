@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.13.0",
     "@prisma/client": "^5.15.0",
     "@react-spring/web": "^9.7.3",
     "@tsparticles/react": "^3.0.0",
